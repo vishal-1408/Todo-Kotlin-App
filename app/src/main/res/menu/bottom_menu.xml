@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/availableTasks"
+        android:icon="@drawable/ic_baseline_not_started_24"
+        android:title="AvailableTasks" />
+    <item
+        android:id="@+id/startedTasks"
+        android:icon="@drawable/ic_baseline_pause_24"
+        android:title="StartedTasks" />
+    <item
+        android:id="@+id/completedTasks"
+        android:icon="@drawable/ic_baseline_done_24"
+        android:title="CompletedTasks" />
+</menu>

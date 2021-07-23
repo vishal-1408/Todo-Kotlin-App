@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/availableTasks">
+
+    <fragment
+        android:id="@+id/availableTasks"
+        android:name="com.example.todo.fragments.AvailableTasks"
+        android:label="Available Tasks"
+        tools:layout="@layout/fragment_available_tasks" >
+        <action
+            android:id="@+id/action_availableTasks_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/startedTasks"
+        android:name="com.example.todo.fragments.StartedTasks"
+        android:label="Ongoing Tasks"
+        tools:layout="@layout/fragment_started_tasks" />
+    <fragment
+        android:id="@+id/completedTasks"
+        android:name="com.example.todo.fragments.CompletedTasks"
+        android:label="Completed Tasks"
+        tools:layout="@layout/fragment_completed_tasks" />
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.example.todo.fragments.BottomSheetFragment"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" >
+        <action
+            android:id="@+id/action_bottomSheetFragment_to_availableTasks"
+            app:destination="@id/availableTasks" />
+    </dialog>
+</navigation>
