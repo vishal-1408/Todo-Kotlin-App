@@ -1,16 +1,22 @@
 package com.example.todo.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.todo.R
+import androidx.lifecycle.coroutineScope
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo.TodoApplication
+import com.example.todo.adapter.TodoAdapter
+import com.example.todo.database.Task.Status
 import com.example.todo.databinding.FragmentStartedTasksBinding
 import com.example.todo.models.TodoViewModel
 import com.example.todo.models.TodoViewModelFactory
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class StartedTasks : Fragment() {
     private val viewModel:TodoViewModel by activityViewModels {
@@ -28,6 +34,28 @@ class StartedTasks : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentStartedTasksBinding.inflate(inflater)
+        val adapter = TodoAdapter {
+            MessageDialog(Status.COMPLETED, it, viewModel, "Done").show(
+                childFragmentManager,
+                MessageDialog.TAG
+            )
+        }
+
+        binding.startedTasksRv.adapter = adapter
+        binding.startedTasksRv.layoutManager = LinearLayoutManager(context)
+        binding.startedTasksRv.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        lifecycle.coroutineScope.launch {
+            viewModel.getByStatus(Status.STARTED).collect {
+                adapter.submitList(it)
+                if (it.size == 0) binding.noStartedItems.visibility = View.VISIBLE
+                else binding.noStartedItems.visibility = View.GONE
+            }
+        }
         return binding.root
     }
 

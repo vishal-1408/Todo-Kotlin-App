@@ -5,13 +5,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.todo.database.Task.Status
 import com.example.todo.database.Task.Task
 import com.example.todo.database.Task.TaskDao
-import java.lang.IllegalArgumentException
+import kotlinx.coroutines.flow.Flow
 
 class TodoViewModel(private val taskDao: TaskDao): ViewModel() {
 
-    fun insertData(title:String,desc:String,status:Status) = taskDao.insert(title,desc,status)
-    fun updateData(task:Task) = taskDao.update(task)
-    fun getByStatus(status:Status):List<Task> = taskDao.getByStatus(status)
+    fun insertData(title: String, desc: String, status: Status) =
+        taskDao.insert(title, desc, status)
+
+    fun updateData(task: Task) = taskDao.update(task)
+    fun getByStatus(status: Status): Flow<List<Task>> = taskDao.getByStatus(status)
+    fun deleteTask(task: Task) = taskDao.deleteTask(task)
 }
 
 //make a viewModelFactory for above viewModel

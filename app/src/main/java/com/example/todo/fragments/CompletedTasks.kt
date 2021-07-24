@@ -1,16 +1,22 @@
 package com.example.todo.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.todo.R
+import androidx.lifecycle.coroutineScope
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo.TodoApplication
+import com.example.todo.adapter.TodoAdapter
+import com.example.todo.database.Task.Status
 import com.example.todo.databinding.FragmentCompletedTasksBinding
 import com.example.todo.models.TodoViewModel
 import com.example.todo.models.TodoViewModelFactory
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class CompletedTasks : Fragment() {
@@ -29,6 +35,24 @@ class CompletedTasks : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCompletedTasksBinding.inflate(inflater)
+
+        // NTG WILLHAPPEN FOR NOW WHEN WE CLICK ON THE ELEMENTS
+        val adapter = TodoAdapter({})
+        binding.completedTasksRv.adapter = adapter
+        binding.completedTasksRv.layoutManager = LinearLayoutManager(context)
+        binding.completedTasksRv.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        lifecycle.coroutineScope.launch {
+            viewModel.getByStatus(Status.COMPLETED).collect {
+                adapter.submitList(it)
+                if (it.size == 0) binding.noCompletedItems.visibility = View.VISIBLE
+                else binding.noCompletedItems.visibility = View.GONE
+            }
+        }
         return binding.root
     }
 

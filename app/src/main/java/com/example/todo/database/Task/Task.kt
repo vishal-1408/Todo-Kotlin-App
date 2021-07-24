@@ -14,5 +14,5 @@ data class Task(
     val id:Int,
     @NotNull val title:String,
     @NotNull val description:String,
-    @NotNull val status:Status
+    @NotNull var status: Status
 )
