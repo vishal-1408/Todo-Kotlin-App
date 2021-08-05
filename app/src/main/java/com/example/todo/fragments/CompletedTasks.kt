@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.todo.TodoApplication
 import com.example.todo.adapter.TodoAdapter
 import com.example.todo.database.Task.Status
@@ -39,13 +38,13 @@ class CompletedTasks : Fragment() {
         // NTG WILLHAPPEN FOR NOW WHEN WE CLICK ON THE ELEMENTS
         val adapter = TodoAdapter({})
         binding.completedTasksRv.adapter = adapter
-        binding.completedTasksRv.layoutManager = LinearLayoutManager(context)
-        binding.completedTasksRv.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
+        binding.completedTasksRv.layoutManager = GridLayoutManager(context, 1)
+//        binding.completedTasksRv.addItemDecoration(
+//            DividerItemDecoration(
+//                context,
+//                DividerItemDecoration.VERTICAL
+//            )
+//        )
         lifecycle.coroutineScope.launch {
             viewModel.getByStatus(Status.COMPLETED).collect {
                 adapter.submitList(it)

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/chint/Desktop/ANDROID/Todo/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/chint/Desktop/ANDROID/Todo/app/src/main/res/drawable/rounded_corners.xml" value="0.1" />
+        <entry key="..\:/Users/chint/Desktop/ANDROID/Todo/app/src/main/res/layout/fragment_available_tasks.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/chint/Desktop/ANDROID/Todo/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/chint/Desktop/ANDROID/Todo/app/src/main/res/layout/list_item.xml" value="0.1296875" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

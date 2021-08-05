@@ -11,8 +11,8 @@ enum class Status{
 @Entity
 data class Task(
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
-    @NotNull val title:String,
-    @NotNull val description:String,
+    val id: Int = 0,
+    @NotNull val title: String,
+    @NotNull val description: String,
     @NotNull var status: Status
 )

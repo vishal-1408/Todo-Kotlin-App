@@ -22,16 +22,21 @@ class MessageDialog(
             .setTitle(task.title)
             .setMessage(task.description)
             .setNegativeButton("Delete") { dialog, which ->
+
+                if (task.status == Status.AVAILABLE) viewModel.clearAlarm(task, requireContext())
                 lifecycle.coroutineScope.launch(Dispatchers.IO) {
                     viewModel.deleteTask(task)
+
                 }
+
                 dialog.cancel()
 
             }.setPositiveButton(positiveButton) { dialog, which ->
+                if (task.status == Status.AVAILABLE) viewModel.clearAlarm(task, requireContext())
                 task.status = status
                 lifecycle.coroutineScope.launch(Dispatchers.IO) {
-
                     viewModel.updateData(task)
+
                 }
                 dialog.cancel()
             }

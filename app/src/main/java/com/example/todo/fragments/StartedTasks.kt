@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.todo.TodoApplication
 import com.example.todo.adapter.TodoAdapter
 import com.example.todo.database.Task.Status
@@ -42,13 +41,13 @@ class StartedTasks : Fragment() {
         }
 
         binding.startedTasksRv.adapter = adapter
-        binding.startedTasksRv.layoutManager = LinearLayoutManager(context)
-        binding.startedTasksRv.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
+        binding.startedTasksRv.layoutManager = GridLayoutManager(context, 1)
+//        binding.startedTasksRv.addItemDecoration(
+//            DividerItemDecoration(
+//                context,
+//                DividerItemDecoration.VERTICAL
+//            )
+//        )
         lifecycle.coroutineScope.launch {
             viewModel.getByStatus(Status.STARTED).collect {
                 adapter.submitList(it)

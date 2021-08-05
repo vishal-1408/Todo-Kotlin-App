@@ -15,6 +15,7 @@ class TodoAdapter(private val alert: (task: Task) -> Unit) :
             var title: String = task.title
             if (task.title.length > 26) title = task.title.slice(0..23) + "..."
             binding.listItemTv.text = title
+
         }
     }
 

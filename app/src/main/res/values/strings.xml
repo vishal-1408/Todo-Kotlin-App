@@ -7,4 +7,7 @@
     <string name="continueTheTasks">Continue</string>
     <string name="start_the_tasks_don_t_be_lazy">Start the Tasks! \nDon\'t Be Lazy ;)</string>
     <string name="complete_the_tasks">Complete The Tasks</string>
+    <string name="pick_a_date">Pick a date</string>
+    <string name="start_task">Start the Task</string>
+    <string name="channel_name">MainTaskNotificationChannel</string>
 </resources>
